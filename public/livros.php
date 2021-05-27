@@ -7,6 +7,8 @@
             margin: auto;
         }
     </style>
+    <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
 </head>
 
 <html>
@@ -22,7 +24,7 @@
         $conexao = RetornaConexao();
 
         $titulo = 'titulo';
-        $autor = 'autor';
+        $autor = 'nome';
         $classificacao = 'classificacao';
         /*TODO-1: Adicione uma variavel para cada coluna */
 
@@ -32,8 +34,9 @@
             '     , ' . $autor .
             '     , ' . $classificacao .
             /*TODO-2: Adicione cada variavel a consulta abaixo */
-            '  FROM livros';
-
+            '  FROM livros 
+            INNER JOIN autores ON livros.autor = autores.autor_id
+            ';
 
         $resultado = mysqli_query($conexao, $sql);
         if (!$resultado) {
@@ -43,10 +46,10 @@
 
 
         $cabecalho =
-            '<table>' .
+        '<table class="table table-striped table-sm">' .
             '    <tr>' .
             '        <th>' . $titulo . '</th>' .
-            '        <th>' . $autor . '</th>' .
+            '        <th>autor</th>' .
             /* TODO-3: Adicione as variaveis ao cabeçalho da tabela */
             '        <th>' . $classificacao . '</th>' .
             '    </tr>';
